@@ -1,0 +1,34 @@
+GPU          : Tesla T4 (hesaplama yetenegi 7.5)
+CPU thread   : 2 (cok thread'li olcum 2 thread ile)
+Goruntu      : 800x600, kenar piksel sayisi: 32626
+Oylama matrisi: 2001 (rho) x 180 (theta, adim 1 derece) = 1.44072 MB; toplam oy = 5.87268e+06
+
+DOGRULUK (CPU 1 thread oylama matrisine gore farkli hucre sayisi, 0 = birebir ayni):
+  CPU 2 thread          : 0
+  GPU naif cekirdek       : 0
+  GPU paylasilan bellek   : 0
+
+SURE (oylama, ms, 30 tekrarin ortalamasi):
+  CPU 1 thread                                   :    47.766
+  CPU 2 thread                                   :    38.954
+  GPU naif (global atomik), sadece cekirdek      :     1.066
+  GPU paylasilan bellek, sadece cekirdek         :     1.158
+  GPU paylasilan bellek, yukleme + indirme dahil :     1.691
+HIZLANMA (CPU 1 thread / GPU): naif 44.81x, paylasilan bellek (cekirdek) 41.25x, paylasilan bellek (toplam) 28.24x
+
+GPU oylama matrisinden doguru bulma: en yuksek oy = 725, esik = 0.4 x 725 = 290
+Esigi gecen dogru sayisi: GPU 4, CPU 4
+  rho =    58.2, theta =   90.0 derece, oy = 725
+  rho =   409.3, theta =   44.9 derece, oy = 663
+  rho =   742.8, theta =    0.3 derece, oy = 484
+  rho =   671.2, theta =   63.3 derece, oy = 365
+
+GERCEK DOGRULARLA KARSILASTIRMA (sahne.png):
+  gercek (rho =   60.0, theta =  90.0) -> bulunan (rho =    58.2, theta =   90.0), orijine en yakin noktalar arasi = 1.8 piksel
+  gercek (rho =  740.0, theta =   0.0) -> bulunan (rho =   742.8, theta =    0.3), orijine en yakin noktalar arasi = 4.8 piksel
+  gercek (rho =  410.1, theta =  45.0) -> bulunan (rho =   409.3, theta =   44.9), orijine en yakin noktalar arasi = 1.1 piksel
+  gercek (rho =  670.8, theta =  63.4) -> bulunan (rho =   671.2, theta =   63.3), orijine en yakin noktalar arasi = 1.0 piksel
+
+Kaydedilenler (cikti_cuda_hough):
+  1_gpu_oylama_matrisi.png            : GPU'da hesaplanan oylama matrisi
+  2_gpu_ile_bulunan_dogrular_yesil.png: GPU oylamasindan bulunan dogrular (yesil)
